@@ -67,7 +67,7 @@ WSGI_APPLICATION = 'saad4.wsgi.application'
 
 
 # =========================
-# Templates System
+# Templates
 # =========================
 TEMPLATES = [
     {
@@ -78,7 +78,7 @@ TEMPLATES = [
             BASE_DIR / 'templates',
         ],
 
-        # يسمح باستخدام templates داخل كل app
+        # يسمح باستخدام templates داخل كل تطبيق
         'APP_DIRS': True,
 
         'OPTIONS': {
@@ -145,7 +145,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-# سيتم تجميع static هنا عند deploy
+# سيتم تجميع الملفات هنا عند collectstatic
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
