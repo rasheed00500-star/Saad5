@@ -9,12 +9,14 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    # التطبيق العام (الواجهة الرئيسية)
+    path('', include('commerce.urls')),
+
     # Django Admin
     path('admin/', admin.site.urls),
 
     # Project Apps
     path('accounts/', include('accounts.urls')),
-    path('store/', include('commerce.urls')),
     path('control/', include('control.urls')),
 ]
 

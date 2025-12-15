@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def home(request):
+    """
+    الصفحة الرئيسية للمتجر
+    """
+    return render(request, 'commerce/home.html')
