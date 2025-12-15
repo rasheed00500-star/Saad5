@@ -140,15 +140,17 @@ USE_TZ = True
 # =========================
 STATIC_URL = '/static/'
 
+# ملفات static الخاصة بالمشروع
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+# سيتم تجميع static هنا عند deploy
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 # =========================
-# Media Files (مهم للقوالب والصور لاحقًا)
+# Media Files
 # =========================
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
