@@ -67,15 +67,23 @@ WSGI_APPLICATION = 'saad4.wsgi.application'
 
 
 # =========================
-# Templates
+# Templates System
 # =========================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # قالب عام للمشروع
+
+        # مجلد القوالب العام
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
+
+        # يسمح باستخدام templates داخل كل app
         'APP_DIRS': True,
+
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -130,13 +138,20 @@ USE_TZ = True
 # =========================
 # Static Files
 # =========================
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+# =========================
+# Media Files (مهم للقوالب والصور لاحقًا)
+# =========================
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # =========================
