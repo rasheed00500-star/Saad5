@@ -47,6 +47,15 @@ class Product(models.Model):
         decimal_places=2,
         verbose_name="السعر"
     )
+
+    # ✅ صورة المنتج (تمت الإضافة)
+    image = models.ImageField(
+        upload_to="products/",
+        blank=True,
+        null=True,
+        verbose_name="صورة المنتج"
+    )
+
     is_active = models.BooleanField(
         default=True,
         verbose_name="نشط"
