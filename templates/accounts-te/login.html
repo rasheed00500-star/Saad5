@@ -6,30 +6,55 @@
 </head>
 <body>
 
-<h2>تسجيل الدخول</h2>
+{% include "header.html" %}
 
-{% if messages %}
-    {% for message in messages %}
-        <p style="color:red;">{{ message }}</p>
-    {% endfor %}
-{% endif %}
+<main style="max-width:400px;margin:50px auto;">
 
-<form method="post">
-    {% csrf_token %}
+    <h2 style="text-align:center;">تسجيل الدخول</h2>
 
-    <label>البريد الإلكتروني</label><br>
-    <input type="email" name="email" required><br><br>
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color:red;text-align:center;">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
 
-    <label>كلمة المرور</label><br>
-    <input type="password" name="password" required><br><br>
+    <form method="post" novalidate>
+        {% csrf_token %}
 
-    <button type="submit">دخول</button>
-</form>
+        <label>البريد الإلكتروني</label>
+        <input
+            type="email"
+            name="email"
+            required
+            style="width:100%;padding:8px;margin-bottom:15px;"
+        >
 
-<p>
-    ليس لديك حساب؟
-    <a href="{% url 'register' %}">إنشاء حساب</a>
-</p>
+        <label>كلمة المرور</label>
+        <input
+            type="password"
+            name="password"
+            required
+            style="width:100%;padding:8px;margin-bottom:20px;"
+        >
+
+        <button
+            type="submit"
+            style="width:100%;padding:10px;cursor:pointer;"
+        >
+            دخول
+        </button>
+    </form>
+
+    <p style="text-align:center;margin-top:15px;">
+        ليس لديك حساب؟
+        <a href="{% url 'register' %}">إنشاء حساب</a>
+    </p>
+
+</main>
+
+{% include "footer.html" %}
 
 </body>
 </html>
