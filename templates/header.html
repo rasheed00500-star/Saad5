@@ -52,24 +52,35 @@
     color: var(--primary);
 }
 
-/* Auth Buttons */
-.auth-buttons {
+/* Auth Area */
+.auth-area {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-.auth-buttons a {
+.welcome-text {
+    font-size: 14px;
+    color: var(--dark);
+}
+
+/* Buttons */
+.auth-area a,
+.auth-area button {
     padding: 8px 16px;
     border-radius: 6px;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
     transition: 0.3s;
+    cursor: pointer;
 }
 
+/* Login */
 .btn-login {
     color: var(--primary);
     border: 1px solid var(--primary);
+    background: transparent;
 }
 
 .btn-login:hover {
@@ -77,12 +88,24 @@
     color: var(--light);
 }
 
+/* Register */
 .btn-register {
     background: var(--primary);
     color: var(--light);
 }
 
 .btn-register:hover {
+    opacity: 0.9;
+}
+
+/* Logout */
+.btn-logout {
+    background: #dc2626;
+    color: var(--light);
+    border: none;
+}
+
+.btn-logout:hover {
     opacity: 0.9;
 }
 
@@ -110,14 +133,15 @@
         display: flex;
     }
 
-    .auth-buttons {
+    .auth-area {
         flex-direction: column;
         width: 100%;
     }
 
-    .auth-buttons a {
-        text-align: center;
+    .auth-area a,
+    .auth-area button {
         width: 100%;
+        text-align: center;
     }
 
     .menu-toggle {
@@ -129,8 +153,10 @@
 <header class="site-header">
     <div class="header-container">
 
+        <!-- Logo -->
         <a href="/" class="logo">HomeStyle</a>
 
+        <!-- Navigation -->
         <nav class="nav-links" id="navMenu">
             <a href="/">الرئيسية</a>
             <a href="#">المنتجات</a>
@@ -139,16 +165,31 @@
             <a href="#">تواصل معنا</a>
         </nav>
 
-        <!-- Auth Buttons -->
-        <div class="auth-buttons">
-            <a href="/accounts/login/" class="btn-login">تسجيل دخول</a>
-            <a href="/accounts/register/" class="btn-register">إنشاء حساب</a>
+        <!-- Auth Area -->
+        <div class="auth-area">
+
+            {% if request.user.is_authenticated %}
+                <span class="welcome-text">
+                    مرحبًا {{ request.user.full_name|default:request.user.email }}
+                </span>
+
+                <form method="post" action="/accounts/logout/">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-logout">تسجيل خروج</button>
+                </form>
+            {% else %}
+                <a href="/accounts/login/" class="btn-login">تسجيل دخول</a>
+                <a href="/accounts/register/" class="btn-register">إنشاء حساب</a>
+            {% endif %}
+
         </div>
 
+        <!-- Mobile Menu Button -->
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
     </div>
 </header>
+
 <script>
 function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('active');
