@@ -3,6 +3,6 @@ from django.shortcuts import render
 
 def home(request):
     """
-    الصفحة الرئيسية للمتجر
+    الصفحة الرئيسية للموقع
     """
-    return render(request, 'commerce/home.html')
+    return render(request, 'home.html')
