@@ -23,6 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 15px;
 }
 
 /* Logo */
@@ -37,6 +38,7 @@
 .nav-links {
     display: flex;
     gap: 25px;
+    align-items: center;
 }
 
 .nav-links a {
@@ -48,6 +50,40 @@
 
 .nav-links a:hover {
     color: var(--primary);
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons a {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-login {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-login:hover {
+    background: var(--primary);
+    color: var(--light);
+}
+
+.btn-register {
+    background: var(--primary);
+    color: var(--light);
+}
+
+.btn-register:hover {
+    opacity: 0.9;
 }
 
 /* Mobile Menu */
@@ -69,9 +105,21 @@
         padding: 15px;
         border-top: 1px solid #e5e7eb;
     }
+
     .nav-links.active {
         display: flex;
     }
+
+    .auth-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .auth-buttons a {
+        text-align: center;
+        width: 100%;
+    }
+
     .menu-toggle {
         display: block;
     }
@@ -83,11 +131,17 @@
         <a href="/" class="logo">HomeStyle</a>
 
         <nav class="nav-links" id="navMenu">
-            <a href="#">الرئيسية</a>
+            <a href="/">الرئيسية</a>
             <a href="#">المنتجات</a>
             <a href="#">العروض</a>
             <a href="#">من نحن</a>
             <a href="#">تواصل معنا</a>
+
+            <!-- Auth Buttons -->
+            <div class="auth-buttons">
+                <a href="/accounts/login/" class="btn-login">تسجيل دخول</a>
+                <a href="/accounts/register/" class="btn-register">إنشاء حساب</a>
+            </div>
         </nav>
 
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
