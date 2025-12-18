@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -53,20 +54,39 @@
         border-radius: 12px;
         padding: 20px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-        transition: transform 0.3s;
+        transition: transform 0.3s ease;
+        text-align: center;
     }
 
     .product-card:hover {
         transform: translateY(-5px);
     }
 
+    .product-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background: #f3f4f6;
+    }
+
     .product-card h3 {
         margin: 10px 0;
+        font-size: 18px;
     }
 
     .price {
         color: #2f6f4e;
         font-weight: bold;
+        font-size: 16px;
+    }
+
+    .empty {
+        text-align: center;
+        color: #6b7280;
+        font-size: 18px;
+        margin-top: 40px;
     }
     </style>
 </head>
@@ -75,29 +95,36 @@
 
 {% include "header.html" %}
 
+<!-- Hero -->
 <section class="hero">
     <h1>منتجات منزلية بتصميم عصري</h1>
     <p>اختر الجمال، الجودة، والراحة لمنزلك</p>
 </section>
 
+<!-- Products -->
 <section class="products">
     <h2>منتجاتنا المميزة</h2>
-    <div class="product-grid">
-        <div class="product-card">
-            <h3>طقم أواني</h3>
-            <div class="price">250 ر.س</div>
-        </div>
 
-        <div class="product-card">
-            <h3>مفرش طاولة</h3>
-            <div class="price">120 ر.س</div>
-        </div>
+    {% if products %}
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-card">
 
-        <div class="product-card">
-            <h3>إضاءة منزلية</h3>
-            <div class="price">340 ر.س</div>
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'images/no-image.png' %}" alt="بدون صورة">
+                    {% endif %}
+
+                    <h3>{{ product.name }}</h3>
+                    <div class="price">{{ product.price }} ر.س</div>
+
+                </div>
+            {% endfor %}
         </div>
-    </div>
+    {% else %}
+        <p class="empty">لا توجد منتجات حالياً</p>
+    {% endif %}
 </section>
 
 {% include "footer.html" %}

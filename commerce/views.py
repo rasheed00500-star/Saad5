@@ -1,16 +1,32 @@
 from django.shortcuts import render
-from django.shortcuts import render
+from .models import Product
 
 
 def home(request):
     """
     الصفحة الرئيسية للموقع
     """
-    return render(request, 'home.html')
+    products = Product.objects.filter(is_active=True)
+
+    return render(
+        request,
+        'home.html',
+        {
+            'products': products
+        }
+    )
 
 
 def products_view(request):
     """
     صفحة عرض المنتجات
     """
-    return render(request, 'commerce-te/products.html')
+    products = Product.objects.filter(is_active=True)
+
+    return render(
+        request,
+        'commerce-te/products.html',
+        {
+            'products': products
+        }
+    )

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -49,11 +50,11 @@
     }
 
     .product-card {
-        background: white;
+        background: #ffffff;
         border-radius: 12px;
         padding: 20px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-        transition: transform 0.3s;
+        transition: transform 0.3s ease;
         text-align: center;
     }
 
@@ -67,6 +68,7 @@
         object-fit: cover;
         border-radius: 8px;
         margin-bottom: 15px;
+        background: #f3f4f6;
     }
 
     .product-card h3 {
@@ -84,6 +86,7 @@
         text-align: center;
         color: #6b7280;
         font-size: 18px;
+        margin-top: 40px;
     }
     </style>
 </head>
@@ -102,13 +105,15 @@
 <section class="products">
     <h2>منتجاتنا</h2>
 
-    {% if products %}
+    {% if products and products.count > 0 %}
         <div class="product-grid">
             {% for product in products %}
                 <div class="product-card">
 
                     {% if product.image %}
                         <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'images/no-image.png' %}" alt="بدون صورة">
                     {% endif %}
 
                     <h3>{{ product.name }}</h3>
