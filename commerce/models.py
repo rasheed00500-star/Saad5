@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import Account
+from cloudinary.models import CloudinaryField
 
 
 # =========================
@@ -48,12 +49,11 @@ class Product(models.Model):
         verbose_name="السعر"
     )
 
-    # ✅ صورة المنتج (تمت الإضافة)
-    image = models.ImageField(
-        upload_to="products/",
+    # ✅ صورة المنتج باستخدام Cloudinary
+    image = CloudinaryField(
+        "product_image",
         blank=True,
-        null=True,
-        verbose_name="صورة المنتج"
+        null=True
     )
 
     is_active = models.BooleanField(
