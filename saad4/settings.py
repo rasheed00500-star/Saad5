@@ -17,11 +17,17 @@ load_dotenv(BASE_DIR / '.env')
 # =========================
 # Security
 # =========================
-SECRET_KEY = 'django-insecure-npy(bjar03%oqu(v(^^nyjn414_tbx0%54_d407i*g$2-oieif'
+SECRET_KEY = os.getenv(
+    'SECRET_KEY',
+    'django-insecure-dev-key'
+)
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+]
 
 
 # =========================
@@ -97,12 +103,29 @@ TEMPLATES = [
 # =========================
 # Database
 # =========================
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.getenv('DJANGO_ENV') == 'production':
+    DATABASES = {
+        'default': {
+            'ENGINE': os.getenv('DB_ENGINE'),
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
+            'CONN_MAX_AGE': 600,
+            'OPTIONS': {
+                'sslmode': 'prefer',  # اتصال داخلي آمن بدون إجبار SSL
+            },
+        }
     }
-}
+else:
+    # Development Database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # =========================
